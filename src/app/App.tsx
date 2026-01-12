@@ -22,10 +22,10 @@ interface AIAssistant {
 const aiAssistants: AIAssistant[] = [
   {
     id: 'cozi',
-    name: 'Cozi',
+    name: '智造坊',
     icon: Bot,
     tagline: '轻量智能助手',
-    description: 'Cozi 提供简洁流畅的对话体验，适合快速问答与日常协作。',
+    description: '智造坊 提供简洁流畅的对话体验，适合快速问答与日常协作。',
     features: [
       '快速对话响应',
       '基础知识检索',
@@ -36,24 +36,24 @@ const aiAssistants: AIAssistant[] = [
   },
   {
     id: 'suna',
-    name: 'Suna',
+    name: '智述',
     icon: MessageSquare,
     tagline: '对话与创意',
-    description: 'Suna 擅长创意生成与对话交流，支持多轮上下文。',
+    description: '智述 擅长创意生成与对话交流，支持多轮上下文。',
     features: [
       '多轮对话与记忆',
       '创意写作辅助',
       '多语言交流'
     ],
     color: 'from-purple-500 to-pink-500',
-    url: 'http://47.122.30.2:3008/'
+    url: 'http://47.122.30.2:3009/'
   },
   {
     id: 'ragflow',
-    name: 'RAGFlow',
+    name: '智源',
     icon: Network,
     tagline: '检索增强生成',
-    description: 'RAGFlow 专注于结合检索与生成，提升答案的准确性与可溯源性。',
+    description: '智源 专注于结合检索与生成，提升答案的准确性与可溯源性。',
     features: [
       '文档检索与引用',
       '可溯源回答',
@@ -80,7 +80,7 @@ export default function App() {
         <div className="px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="size-6 text-indigo-600" />
-            <h1 className="font-semibold text-slate-900">AI助手中心</h1>
+            <h1 className="font-semibold text-slate-900"> 智衍AI多智能体平台</h1>
           </div>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -101,8 +101,8 @@ export default function App() {
                   key={assistant.id}
                   onClick={() => handleSelectAssistant(assistant)}
                   className={`w-full px-4 py-3 flex items-center gap-3 transition-colors border-b border-slate-100 ${isSelected
-                      ? 'bg-indigo-50 text-indigo-600'
-                      : 'text-slate-700 hover:bg-slate-50'
+                    ? 'bg-indigo-50 text-indigo-600'
+                    : 'text-slate-700 hover:bg-slate-50'
                     }`}
                 >
                   <div className={`p-2 rounded-lg bg-gradient-to-br ${assistant.color} text-white`}>
@@ -130,7 +130,7 @@ export default function App() {
                 <Sparkles className="size-5 text-white" />
               </div>
               <div>
-                <h1 className="font-semibold text-slate-900">AI助手中心</h1>
+                <h1 className="font-semibold text-slate-900"> 智衍AI多智能体平台</h1>
               </div>
             </div>
           </div>
@@ -145,8 +145,8 @@ export default function App() {
                   key={assistant.id}
                   onClick={() => handleSelectAssistant(assistant)}
                   className={`w-full p-3 rounded-lg transition-all duration-200 ${isSelected
-                      ? 'bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 shadow-sm'
-                      : 'bg-slate-50 hover:bg-slate-100 border-2 border-transparent'
+                    ? 'bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 shadow-sm'
+                    : 'bg-slate-50 hover:bg-slate-100 border-2 border-transparent'
                     }`}
                 >
                   <div className="flex items-center gap-3">
