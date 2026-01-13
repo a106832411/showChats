@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+    tools {
+        nodejs 'NodeJS'  // 这里的名称需要与 Jenkins 中配置的 NodeJS 工具名称一致
+    }
+    
     environment {
         NODE_VERSION = '18'
         BUILD_DIR = 'dist'
@@ -13,14 +17,18 @@ pipeline {
                 echo '检出代码...'
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/a106832411/showChats.git']]
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [[url: 'https://gitee.com/sam23333/showchats.git']]
                 ])
             }
         }
         
         stage('安装依赖') {
             steps {
+                echo '检查 Node 版本...'
+                sh 'node -v'
+                sh 'npm -v'
+                
                 echo '安装 pnpm...'
                 sh 'npm install -g pnpm'
                 
