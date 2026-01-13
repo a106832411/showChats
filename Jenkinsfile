@@ -47,12 +47,19 @@ pipeline {
         stage('部署') {
             steps {
                 echo '部署到服务器...'
-                // 方式1：使用 PM2 部署
                 sh '''
-                    npm install -g pm2
-                    pm2 delete Chats || true
-                    pm2 start ecosystem.config.cjs
-                    pm2 save
+                    # 停止并删除旧容器
+                    docker stop showchats || true
+                    docker rm showchats || true
+                    
+                    # 构建新镜像
+                    docker build -t showchats:latest .
+                    
+                    # 运行新容器
+                    docker run -d --name showchats \
+                        -p 3000:3000 \
+                        --restart unless-stopped \
+                        showchats:latest
                 '''
             }
         }
@@ -60,9 +67,8 @@ pipeline {
         stage('健康检查') {
             steps {
                 echo '检查服务状态...'
-                sh 'pm2 list'
-                sh 'sleep 3'
-                sh 'pm2 info Chats || true'
+                sh 'docker ps | grep showchats'
+                sh 'sleep 5'
                 sh 'curl -I http://localhost:3000 || echo "服务启动中..."'
             }
         }
