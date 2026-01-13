@@ -42,9 +42,6 @@ pipeline {
                     pm2 start ecosystem.config.cjs
                     pm2 save
                 '''
-                
-                // 方式2：或者复制构建产物到 Nginx 目录
-                // sh 'cp -r dist/* /var/www/html/'
             }
         }
         
