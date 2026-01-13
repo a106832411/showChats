@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "Chats",
       script: "npm",
-      args: "run preview -- --port=3000",
+      args: "run preview -- --host 0.0.0.0 --port 3000",
       env: {
         PORT: 3000,
       },
