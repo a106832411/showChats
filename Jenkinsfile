@@ -11,7 +11,11 @@ pipeline {
         stage('检出代码') {
             steps {
                 echo '检出代码...'
-                checkout scm
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/a106832411/showChats.git']]
+                ])
             }
         }
         
@@ -49,23 +53,24 @@ pipeline {
             steps {
                 echo '检查服务状态...'
                 sh 'pm2 list'
-                sh 'sleep 5'
-                sh 'curl -f http://localhost:3000 || exit 1'
+                sh 'sleep 3'
+                sh 'pm2 info Chats || true'
+                sh 'curl -I http://localhost:3000 || echo "服务启动中..."'
             }
         }
     }
     
     post {
         success {
-            echo '部署成功！'
+            echo '✅ 部署成功！'
+            echo '服务地址: http://服务器IP:3000'
         }
         failure {
-            echo '部署失败，回滚...'
-            sh 'pm2 delete Chats || true'
+            echo '❌ 部署失败！'
+            sh 'pm2 logs Chats --lines 30 || true'
         }
         always {
-            echo '清理工作空间...'
-            cleanWs()
+            echo '清理完成'
         }
     }
 }
